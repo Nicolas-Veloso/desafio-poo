@@ -39,15 +39,28 @@ public class ImovelService {
         return false;
     }
 
-    public int calcularAluguel(int id, int meses) {
+    public double calcularAluguel(int id, int meses) {
         Imovel imovel = getImovelById(id);
+
         if (imovel == null) {
             throw new IllegalArgumentException("Erro: Imóvel com o ID " + id + " não encontrado");
         }
         if (meses <= 0) {
             throw new IllegalArgumentException("O período de meses deve ser um número inteiro maior que 0");
         }
-        return imovel.calcularAluguel(meses);
+        double precoTotal = imovel.calcularAluguel(meses);
+        if (meses >= 12 && meses < 24) {
+            System.out.println("O periodo de " + meses + " meses disponibiliza um desconto de 10%");
+            return precoTotal * 0.1;
+        } else if (meses >= 24 && meses < 36) {
+            System.out.println("O periodo de " + meses + " meses disponibiliza um desconto de 15%");
+            return precoTotal * 0.15;
+        } else if (meses >= 36) {
+            System.out.println("O periodo de " + meses + " meses disponibiliza um desconto de 20%");
+            return precoTotal * 0.2;
+        } else {
+            return precoTotal;
+        }
     }
 
     public void alugarImovel(int id) {

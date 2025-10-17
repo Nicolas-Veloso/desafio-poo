@@ -79,7 +79,7 @@ public class Main {
                     int idImovelToCalc = scanner.nextInt();
                     System.out.println("Informe quantos meses de aluguel deseja calcular: ");
                     int meses = scanner.nextInt();
-                    int precoAluguel = imovelService.calcularAluguel(idImovelToCalc, meses);
+                    double precoAluguel = imovelService.calcularAluguel(idImovelToCalc, meses);
                     System.out.println("O preço do aluguel para " + meses + " meses é " + precoAluguel);
                     break;
                 //5 - Alugar imóvel

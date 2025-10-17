@@ -60,7 +60,7 @@ public abstract class Imovel {
                 "\nTelefone: " + this.proprietario.getTelefone();
     }
 
-    public Integer calcularAluguel(int meses) {
+    public double calcularAluguel(int meses) {
         return 200 * meses;
     }
 
