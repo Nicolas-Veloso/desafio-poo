@@ -2,16 +2,24 @@ package domain;
 
 public abstract class Imovel {
 
+    private final int id;
+    private static int CONTADOR;
     protected String endereco;
     protected int numero;
     protected boolean alugado;
     private Proprietario proprietario;
 
-    public Imovel(String endereco, int numero, boolean alugado, Proprietario proprietario) {
+    public Imovel(String endereco, int numero, Proprietario proprietario) {
+        this.id = CONTADOR;
         this.endereco = endereco;
         this.numero = numero;
-        this.alugado = alugado;
         this.proprietario = proprietario;
+        this.alugado = false;
+        CONTADOR++;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getEndereco() {
@@ -30,10 +38,6 @@ public abstract class Imovel {
         this.numero = numero;
     }
 
-    public boolean isAlugado() {
-        return this.alugado;
-    }
-
     public void setAlugado(boolean alugado) {
         this.alugado = alugado;
     }
@@ -47,7 +51,7 @@ public abstract class Imovel {
     }
 
     public boolean estaAlugado() {
-        return this.isAlugado();
+        return this.alugado;
     }
 
     public String contatoProprietario() {
@@ -56,14 +60,15 @@ public abstract class Imovel {
                 "\nTelefone: " + this.proprietario.getTelefone();
     }
 
-    public Integer calcularAluguel(int periodoDeTempo) {
-        return 100 * periodoDeTempo;
+    public Integer calcularAluguel(int meses) {
+        return 200 * meses;
     }
 
     @Override
     public String toString() {
         return "Imovel{" +
-                "endereco='" + endereco + '\'' +
+                "id=" + id +
+                ", endereco='" + endereco + '\'' +
                 ", numero=" + numero +
                 ", alugado=" + alugado +
                 ", proprietario=" + proprietario +

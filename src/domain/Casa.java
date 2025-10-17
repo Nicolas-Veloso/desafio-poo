@@ -2,8 +2,8 @@ package domain;
 
 public class Casa extends Imovel {
 
-    public Casa(String endereco, int numero, boolean alugado, Proprietario proprietario) {
-        super(endereco, numero, alugado, proprietario);
+    public Casa(String endereco, int numero, Proprietario proprietario) {
+        super(endereco, numero, proprietario);
     }
 
     @Override
