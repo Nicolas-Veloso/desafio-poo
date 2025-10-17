@@ -41,10 +41,13 @@ public class ImovelService {
 
     public int calcularAluguel(int id, int meses) {
         Imovel imovel = getImovelById(id);
-        if (imovel != null) {
-            return imovel.calcularAluguel(meses);
+        if (imovel == null) {
+            throw new IllegalArgumentException("Erro: Imóvel com o ID " + id + " não encontrado");
         }
-        return -1;
+        if (meses <= 0) {
+            throw new IllegalArgumentException("O período de meses deve ser um número inteiro maior que 0");
+        }
+        return imovel.calcularAluguel(meses);
     }
 
     public void alugarImovel(int id) {

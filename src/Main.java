@@ -15,7 +15,7 @@ public class Main {
 
         int escolha = -1;
         while (escolha != 0) {
-            System.out.println("===== Escolha uma opção =====");
+            System.out.println("===== MENU =====");
             System.out.println("1 - Cadastrar proprietário");
             System.out.println("2 - Cadastrar imóvel");
             System.out.println("3 - Deletar imóvel");
@@ -80,11 +80,7 @@ public class Main {
                     System.out.println("Informe quantos meses de aluguel deseja calcular: ");
                     int meses = scanner.nextInt();
                     int precoAluguel = imovelService.calcularAluguel(idImovelToCalc, meses);
-                    if (precoAluguel == -1) {
-                        System.out.println("Imovel com ID " + idImovelToCalc + " não encontrado");
-                    } else {
-                        System.out.println("O preço do aluguel durante " + meses + " meses é " + precoAluguel);
-                    }
+                    System.out.println("O preço do aluguel para " + meses + " meses é " + precoAluguel);
                     break;
                 //5 - Alugar imóvel
                 case 5:
