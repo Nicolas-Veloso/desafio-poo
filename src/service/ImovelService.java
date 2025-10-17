@@ -1,9 +1,6 @@
 package service;
 
-import domain.Apartamento;
-import domain.Casa;
-import domain.Imovel;
-import domain.Proprietario;
+import domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ public class ImovelService {
 
     private final Scanner SCANNER_DE_ENTRADA = new Scanner(System.in);
     List<Imovel> listaDeImoveis = new ArrayList<>();
+    InquilinoService inquilinoService = new InquilinoService();
 
     public void cadastrarImovel(String endereco, int numero, Proprietario proprietario) throws NoSuchElementException{
         String tipoImovel = selecionarImovel();
@@ -63,35 +61,61 @@ public class ImovelService {
         }
     }
 
-    public void alugarImovel(int id) {
-        Imovel imovel = getImovelById(id);
+    public void realizarAluguel(String nome, String telefone, String cpf, int idImovel) {
+
+        Imovel imovel = getImovelById(idImovel);
+
         if (imovel == null) {
-            System.out.println("Erro: Imóvel com id " + id + " não encontrado");
+            System.out.println("Erro: Imóvel com ID " + idImovel + " não encontrado.");
             return;
         }
 
         if (imovel.estaAlugado()) {
-            System.out.println("Atenção: Imóvel com o id " + id + " já está alugado");
-        } else {
-            imovel.setAlugado(true);
-            System.out.println("Sucesso: Imóvel com o id " + id + " foi alugado com sucesso");
-        }
-    }
-
-    public void disponibilizarImovel(int id) {
-        Imovel imovel = getImovelById(id);
-
-        if (imovel == null) {
-            System.out.println("Erro: Imóvel com id " + id + " não encontrado");
+            System.out.println("Atenção: Imóvel com ID " + idImovel + " já está alugado");
             return;
         }
 
-        if (!imovel.estaAlugado()) {
-            System.out.println("Atenção: Imóvel com id " + id + " ja está disponível");
-        } else {
-            imovel.setAlugado(false);
-            System.out.println("Sucesso: Imóvel com o id " + id + " foi disponibilizado com sucesso");
+        Proprietario donoDoImovel = imovel.getProprietario();
+        if (donoDoImovel != null && donoDoImovel.getCpf().equals(cpf)) {
+            System.out.println("Erro: Proprietário não pode ser Inquilino do próprio imóvel.");
+            return;
         }
+
+        Inquilino novoInquilino = inquilinoService.cadastrarInquilino(nome, telefone, cpf, imovel);
+
+        if (novoInquilino == null) {
+            System.out.println("Erro ao criar Inquilino.");
+            return;
+        }
+
+        imovel.setAlugado(true);
+
+        System.out.println("Sucesso: Imóvel alugado com sucesso e inquilino cadastrado.");
+    }
+
+    public void disponibilizarImovel(int idImovel, int idAgente)
+            throws SecurityException, IllegalArgumentException
+    {
+        Imovel imovel = getImovelById(idImovel);
+
+        if (imovel == null) {
+            throw new IllegalArgumentException("Imóvel com ID " + idImovel + " não encontrado.");
+        }
+
+        Proprietario donoDoImovel = imovel.getProprietario();
+
+        if (donoDoImovel == null || donoDoImovel.getId() != idAgente) {
+            throw new SecurityException("Ação negada: Você não é o proprietário (ID " + idAgente + ") deste imóvel. Apenas o proprietário pode encerrar o contrato.");
+        }
+
+        if (!imovel.estaAlugado()) {
+            System.out.println("Atenção: Imóvel já está disponível para aluguel.");
+            return;
+        }
+
+        imovel.setAlugado(false);
+
+        System.out.println("Sucesso: Contrato encerrado. Imóvel ID " + idImovel + " agora está disponível.");
     }
 
     public void mostrarImoveisAlugados() {

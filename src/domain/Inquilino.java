@@ -4,8 +4,9 @@ public class Inquilino extends Pessoa{
 
     private Imovel imovelAlugado;
 
-    public Inquilino(String nome, String telefone, String cpf) {
+    public Inquilino(String nome, String telefone, String cpf, Imovel imovelAlugado) {
         super(nome, telefone, cpf);
+        this.imovelAlugado = imovelAlugado;
     }
 
     @Override

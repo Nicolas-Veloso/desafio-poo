@@ -1,5 +1,6 @@
 package service;
 
+import domain.Imovel;
 import domain.Inquilino;
 
 import java.util.ArrayList;
@@ -9,9 +10,10 @@ public class InquilinoService {
 
     List<Inquilino> listaDeInquilinos = new ArrayList<>();
 
-    public void cadastrarInquilino(String nome, String telefone, String cpf) {
-        Inquilino newInquilino = new Inquilino(nome, telefone, cpf);
+    public Inquilino cadastrarInquilino(String nome, String telefone, String cpf, Imovel imovel) {
+        Inquilino newInquilino = new Inquilino(nome, telefone, cpf, imovel);
         listaDeInquilinos.add(newInquilino);
+        return newInquilino;
     }
 
     public Inquilino getInquilinoById(int id) {
