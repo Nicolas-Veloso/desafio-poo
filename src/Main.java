@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     /*
-    TODO: Adicionar polimorfismo no método calcular aluguel, Implementar classe inquilino
+    TODO: Implementar classe inquilino
      */
     public static void main(String[] args) {
 
