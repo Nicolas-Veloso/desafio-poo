@@ -8,9 +8,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    /*
-    TODO: Implementar classe inquilino
-     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -22,12 +19,13 @@ public class Main {
         while (escolha != 0) {
             System.out.println("===== MENU =====");
             System.out.println("1 - Cadastrar proprietário");
-            System.out.println("2 - Cadastrar imóvel");
-            System.out.println("3 - Deletar imóvel");
-            System.out.println("4 - Calcular aluguel");
-            System.out.println("5 - Alugar imóvel");
-            System.out.println("6 - Disponibilizar imóvel");
-            System.out.println("7 - Mostrar imóveis alugados");
+            System.out.println("2 - Cadastrar inquilino");
+            System.out.println("3 - Cadastrar imóvel");
+            System.out.println("4 - Deletar imóvel");
+            System.out.println("5 - Calcular aluguel");
+            System.out.println("6 - Alugar imóvel");
+            System.out.println("7 - Disponibilizar imóvel");
+            System.out.println("8 - Mostrar imóveis alugados");
             System.out.println("0 - Sair");
             escolha = scanner.nextInt();
             //limpa o buffer do scanner
@@ -45,8 +43,19 @@ public class Main {
                     proprietarioService.cadastrarProprietario(nome, telefone, cpf);
                     System.out.println("Sucesso: Proprietario cadastrado com sucesso");
                     break;
-                //2 - Cadastrar Imóvel
+                //2 - Cadastrar Inquilino
                 case 2:
+                    System.out.println("Informe o nome do inquilino: ");
+                    String nomeInquilino = scanner.next();
+                    System.out.println("Informe o telefone do inquilino: ");
+                    String telefoneInquilino = scanner.next();
+                    System.out.println("Informe o CPF do inquilino: ");
+                    String cpfInquilino = scanner.next();
+                    inquilinoService.cadastrarInquilino(nomeInquilino, telefoneInquilino, cpfInquilino);
+                    System.out.println("Sucesso: Inquilino cadastrado com sucesso");
+                    break;
+                //3 - Cadastrar Imóvel
+                case 3:
                     if (proprietarioService.estaVazio()) {
                         System.out.println("Erro: Nenhum proprietário cadastrado, Cadastre um proprietário (opção 1)");
                         break;
@@ -66,8 +75,8 @@ public class Main {
                     int numero = scanner.nextInt();
                     imovelService.cadastrarImovel(endereco, numero, proprietario);
                     break;
-                //3 - Deletar imóvel
-                case 3:
+                //4 - Deletar imóvel
+                case 4:
                     imovelService.listarImoveis();
                     System.out.println("Informe o ID do imóvel que deseja excluir: ");
                     int idImovel = scanner.nextInt();
@@ -77,8 +86,8 @@ public class Main {
                         System.out.println("Erro: Imóvel não encontrado");
                     }
                     break;
-                //4 - Calcular aluguel
-                case 4:
+                //5 - Calcular aluguel
+                case 5:
                     imovelService.listarImoveis();
                     System.out.println("Informe o ID do imóvel: ");
                     int idImovelToCalc = scanner.nextInt();
@@ -87,24 +96,25 @@ public class Main {
                     double precoAluguel = imovelService.calcularAluguel(idImovelToCalc, meses);
                     System.out.printf("O preço do aluguel para %d meses é R$%.2f\n", meses, precoAluguel);
                     break;
-                //5 - Alugar imóvel
-                case 5:
+                //6 - Alugar imóvel
+                case 6:
                     imovelService.listarImoveis();
                     System.out.println("Informe o ID do imóvel que deseja alugar: ");
                     int idParaAlugar = scanner.nextInt();
                     imovelService.alugarImovel(idParaAlugar);
                     break;
-                //6 - Disponibilizar imóvel
-                case 6:
+                //7 - Disponibilizar imóvel
+                case 7:
                     imovelService.listarImoveis();
                     System.out.println("Informe o ID do imóvel que deseja disponibilizar: ");
                     int idParaDisponibilizar = scanner.nextInt();
                     imovelService.disponibilizarImovel(idParaDisponibilizar);
                     break;
-                //7 - Mostrar imóveis alugados
-                case 7:
+                //8 - Mostrar imóveis alugados
+                case 8:
                     imovelService.mostrarImoveisAlugados();
             }
         }
+        scanner.close();
     }
 }
