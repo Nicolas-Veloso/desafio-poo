@@ -51,13 +51,13 @@ public class ImovelService {
         double precoTotal = imovel.calcularAluguel(meses);
         if (meses >= 12 && meses < 24) {
             System.out.println("O periodo de " + meses + " meses disponibiliza um desconto de 10%");
-            return precoTotal * 0.1;
+            return precoTotal -= precoTotal * 0.1;
         } else if (meses >= 24 && meses < 36) {
             System.out.println("O periodo de " + meses + " meses disponibiliza um desconto de 15%");
-            return precoTotal * 0.15;
+            return precoTotal -= precoTotal * 0.15;
         } else if (meses >= 36) {
             System.out.println("O periodo de " + meses + " meses disponibiliza um desconto de 20%");
-            return precoTotal * 0.2;
+            return precoTotal -= precoTotal * 0.2;
         } else {
             return precoTotal;
         }
@@ -125,7 +125,6 @@ public class ImovelService {
     public void listarImoveis() {
         for (Imovel imovel : listaDeImoveis) {
             System.out.println(imovel);
-            System.out.println(imovel.getId());
         }
     }
 }

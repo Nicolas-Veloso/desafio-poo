@@ -1,4 +1,4 @@
-import domain.Imovel;
+
 import domain.Proprietario;
 import service.ImovelService;
 import service.ProprietarioService;
@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class Main {
 
+    /*
+    TODO: Adicionar polimorfismo no método calcular aluguel, Implementar classe inquilino
+     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -80,7 +83,7 @@ public class Main {
                     System.out.println("Informe quantos meses de aluguel deseja calcular: ");
                     int meses = scanner.nextInt();
                     double precoAluguel = imovelService.calcularAluguel(idImovelToCalc, meses);
-                    System.out.println("O preço do aluguel para " + meses + " meses é " + precoAluguel);
+                    System.out.printf("O preço do aluguel para %d meses é R$%.2f\n", meses, precoAluguel);
                     break;
                 //5 - Alugar imóvel
                 case 5:
