@@ -2,12 +2,23 @@ package domain;
 
 public class Inquilino extends Pessoa{
 
-    public Inquilino(String nome, String telefone, String cpf) {
+    private Imovel imovelAlugado;
+
+    public Inquilino(String nome, String telefone, String cpf, Imovel imovelAlugado) {
         super(nome, telefone, cpf);
+        this.imovelAlugado = imovelAlugado;
     }
 
     @Override
     public String getTipoPessoa() {
         return "Inquilino";
+    }
+
+    public Imovel getImovelAlugado() {
+        return imovelAlugado;
+    }
+
+    public void setImovelAlugado(Imovel imovelAlugado) {
+        this.imovelAlugado = imovelAlugado;
     }
 }

@@ -1,6 +1,7 @@
 
 import domain.Proprietario;
 import service.ImovelService;
+import service.InquilinoService;
 import service.ProprietarioService;
 
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ImovelService imovelService = new ImovelService();
         ProprietarioService proprietarioService = new ProprietarioService();
+        InquilinoService inquilinoService = new InquilinoService();
 
         int escolha = -1;
         while (escolha != 0) {
